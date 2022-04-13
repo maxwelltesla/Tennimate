@@ -4,7 +4,7 @@ from math import pi, isnan                         //用于检查给定数字是
 class PID:   //定义类
     _kp = _ki = _kd = _integrator = _imax = 0      //定义类变量
     _last_error = _last_derivative = _last_t = 0   //定义类变量
-    _RC = 1/(2 * pi * 20)                          //定义类变量
+    _RC = 1/(2 * pi * 20)                          //定义类变量   _RC的含义是：？？
     def __init__(self, p=0, i=0, d=0, imax=0):     //初始化成员变量
         self._kp = float(p)
         self._ki = float(i)
