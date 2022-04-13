@@ -1,6 +1,6 @@
 from pyb import millis
 from math import pi, isnan
- 
+//把算法抽象写成类，类中有类变量、成员变量、成员函数（类对象方法）
 class PID:   //定义类
     _kp = _ki = _kd = _integrator = _imax = 0      //定义类变量
     _last_error = _last_derivative = _last_t = 0   //定义类变量
@@ -22,7 +22,7 @@ class PID:   //定义类
         self._last_t = tnow                        //到当下的累计最终时间量
         delta_time = float(dt) / float(1000)       //delta_time  ：秒  
         output += error * self._kp                 //按比例值累计误差
-        if abs(self._kd) > 0 and dt > 0:           //有时差和累计微分项   _kd，实际使用时多少个PID对象呢？
+        if abs(self._kd) > 0 and dt > 0:           //有时差和累计微分项   _kd，实际使用时多少个PID对象呢？单个PID对象，多次调用get_pid对象方法
             if isnan(self._last_derivative):       //_last_derivative为空
                 derivative = 0
                 self._last_derivative = 0
