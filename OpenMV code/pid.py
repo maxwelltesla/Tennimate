@@ -1,4 +1,4 @@
-from pyb import millis
+from pyb import millis                             //pyb 模块包含了和 pyboard 相关的函数
 from math import pi, isnan
 //把算法抽象写成类，类中有类变量、成员变量、成员函数（类对象方法）
 class PID:   //定义类
