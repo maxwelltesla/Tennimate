@@ -10,19 +10,19 @@ class PID:
         self._ki = float(i)
         self._kd = float(d)
         self._imax = abs(imax)
-        self._last_derivative = float('nan')
+        self._last_derivative = float('nan')    //'nan'空的使用
  
     def get_pid(self, error, scaler):
         tnow = millis()
         dt = tnow - self._last_t
         output = 0
-        if self._last_t == 0 or dt > 1000:
+        if self._last_t == 0 or dt > 1000:   //时间跨度为零：刚开始。时间跨度>1000，累计时长
             dt = 0
-            self.reset_I()
+            self.reset_I()    //重置积分项
         self._last_t = tnow
         delta_time = float(dt) / float(1000)
-        output += error * self._kp
-        if abs(self._kd) > 0 and dt > 0:
+        output += error * self._kp        //按比例值累计误差
+        if abs(self._kd) > 0 and dt > 0:  //有时差和累计微分项
             if isnan(self._last_derivative):
                 derivative = 0
                 self._last_derivative = 0
@@ -35,7 +35,7 @@ class PID:
             self._last_derivative = derivative
             output += self._kd * derivative
         output *= scaler
-        if abs(self._ki) > 0 and dt > 0:
+        if abs(self._ki) > 0 and dt > 0: //有时差和累计积分项
             self._integrator += (error * self._ki) * scaler * delta_time
             if self._integrator < -self._imax: self._integrator = -self._imax
             elif self._integrator > self._imax: self._integrator = self._imax
