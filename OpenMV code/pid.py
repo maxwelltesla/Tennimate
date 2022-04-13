@@ -1,5 +1,5 @@
 from pyb import millis                             //pyb 模块包含了和 pyboard 相关的函数
-from math import pi, isnan
+from math import pi, isnan                         //用于检查给定数字是否为“ NaN” (不是数字)，它接受一个数字，如果给定数字为“ NaN” ，则返回True ，否则返回False 
 //把算法抽象写成类，类中有类变量、成员变量、成员函数（类对象方法）
 class PID:   //定义类
     _kp = _ki = _kd = _integrator = _imax = 0      //定义类变量
