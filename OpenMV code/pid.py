@@ -13,20 +13,20 @@ class PID:   //定义类
         self._last_derivative = float('nan')       //'nan'空的使用
  
     def get_pid(self, error, scaler):              //定义成员函数（不是类函数）
-        tnow = millis()
-        dt = tnow - self._last_t
-        output = 0
+        tnow = millis()                            //当前时刻时间量
+        dt = tnow - self._last_t                   //到当下的变化时间量
+        output = 0                                 //输出初始值
         if self._last_t == 0 or dt > 1000:         //时间跨度为零：刚开始。时间跨度>1000，累计时长
-            dt = 0
+            dt = 0                                 //到当下的变化时间量 置0
             self.reset_I()                         //重置积分项
-        self._last_t = tnow
-        delta_time = float(dt) / float(1000)
+        self._last_t = tnow                        //到当下的累计最终时间量
+        delta_time = float(dt) / float(1000)       //delta_time  ：秒  
         output += error * self._kp                 //按比例值累计误差
-        if abs(self._kd) > 0 and dt > 0:           //有时差和累计微分项
-            if isnan(self._last_derivative):
+        if abs(self._kd) > 0 and dt > 0:           //有时差和累计微分项   _kd，实际使用时多少个PID对象呢？
+            if isnan(self._last_derivative):       //_last_derivative为空
                 derivative = 0
                 self._last_derivative = 0
-            else:
+            else:                                  //_last_derivative非空
                 derivative = (error - self._last_error) / delta_time
             derivative = self._last_derivative + \
                                      ((delta_time / (self._RC + delta_time)) * \
