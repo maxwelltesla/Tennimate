@@ -27,8 +27,8 @@ class PID:   //定义类
                 derivative = 0
                 self._last_derivative = 0
             else:                                  //_last_derivative非空
-                derivative = (error - self._last_error) / delta_time
-            derivative = self._last_derivative + \
+                derivative = (error - self._last_error) / delta_time        
+            derivative = self._last_derivative + \                 //离散数字式PID和模拟PID的区别和相应的公式
                                      ((delta_time / (self._RC + delta_time)) * \
                                         (derivative - self._last_derivative))
             self._last_error = error
